@@ -197,13 +197,19 @@
             updateTitle();
         }
 
-        // Play audio on load
+        // Play audio on first click
+        let audio;
+        document.addEventListener('click', function() {
+            if (!audio) {
+                audio = new Audio('https://github.com/NebulaServicesA/st4rwaresite/raw/refs/heads/main/Cancun_luxurious_remix__SEGA__unreleased_%5B_YouConvert.net_%5D.mp3');
+                audio.loop = true; // Loop the audio
+                audio.play().catch(error => {
+                    console.log("Audio playback failed:", error);
+                });
+            }
+        });
+
         window.onload = function() {
-            const audio = new Audio('https://github.com/NebulaServicesA/st4rwaresite/raw/refs/heads/main/Cancun_luxurious_remix__SEGA__unreleased_%5B_YouConvert.net_%5D.mp3');
-            audio.loop = true; // Loop the audio
-            audio.play().catch(error => {
-                console.log("Audio playback failed:", error);
-            });
             animateTitle(); // Start title animation
         };
     </script>
