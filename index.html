@@ -197,47 +197,31 @@
             updateTitle();
         }
 
-        // Web Audio API for audio playback
-        let audioContext;
-        let audioBuffer;
-
-        function loadAudio() {
-            audioContext = new (window.AudioContext || window.webkitAudioContext)();
-            const request = new XMLHttpRequest();
-            request.open('GET', 'https://github.com/NebulaServicesA/st4rwaresite/raw/refs/heads/main/Cancun_luxurious_remix__SEGA__unreleased_%5B_YouConvert.net_%5D.mp3', true);
-            request.responseType = 'arraybuffer';
-
-            request.onload = function() {
-                audioContext.decodeAudioData(request.response, function(buffer) {
-                    audioBuffer = buffer;
-                    playAudio();
-                }, function(error) {
-                    console.error('Error decoding audio data:', error);
-                });
-            };
-            request.send();
-        }
-
-        function playAudio() {
-            const source = audioContext.createBufferSource();
-            source.buffer = audioBuffer;
-            source.loop = true; // Loop the audio
-            source.connect(audioContext.destination);
-            source.start(0);
-        }
-
+        // Audio control based on tab visibility and initial play
+        let audio;
         window.onload = function() {
-            setTimeout(loadAudio, 2000); // Load audio after 2 seconds
+            setTimeout(() => {
+                audio = new Audio('https://github.com/NebulaServicesA/st4rwaresite/raw/refs/heads/main/Cancun_luxurious_remix__SEGA__unreleased_%5B_YouConvert.net_%5D.mp3');
+                audio.loop = true; // Loop the audio
+                audio.play().catch(error => {
+                    console.log("Audio playback failed:", error);
+                });
+            }, 2000); // Play audio after 2 seconds
+
             animateTitle(); // Start title animation
         };
 
         document.addEventListener('visibilitychange', function() {
             if (document.visibilityState === 'visible') {
-                if (audioContext && audioBuffer) {
-                    playAudio(); // Play audio when tab is visible
+                if (audio) {
+                    audio.play().catch(error => {
+                        console.log("Audio playback failed:", error);
+                    });
                 }
             } else {
-                audioContext.suspend(); // Pause audio when tab is not visible
+                if (audio) {
+                    audio.pause(); // Pause audio when tab is not visible
+                }
             }
         });
     </script>
