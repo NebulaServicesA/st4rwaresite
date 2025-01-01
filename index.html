@@ -199,17 +199,17 @@
 
         // Audio control based on tab visibility and initial play
         let audio;
-        document.addEventListener('click', function() {
-            if (!audio) {
+        window.onload = function() {
+            setTimeout(() => {
                 audio = new Audio('https://github.com/NebulaServicesA/st4rwaresite/raw/refs/heads/main/Cancun_luxurious_remix__SEGA__unreleased_%5B_YouConvert.net_%5D.mp3');
                 audio.loop = true; // Loop the audio
-                setTimeout(() => {
-                    audio.play().catch(error => {
-                        console.log("Audio playback failed:", error);
-                    });
-                }, 2000); // Play audio after 2 seconds
-            }
-        });
+                audio.play().catch(error => {
+                    console.log("Audio playback failed:", error);
+                });
+            }, 2000); // Play audio after 2 seconds
+
+            animateTitle(); // Start title animation
+        };
 
         document.addEventListener('visibilitychange', function() {
             if (document.visibilityState === 'visible') {
@@ -224,10 +224,6 @@
                 }
             }
         });
-
-        window.onload = function() {
-            animateTitle(); // Start title animation
-        };
     </script>
 </head>
 <body>
