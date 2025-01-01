@@ -198,9 +198,8 @@
         }
 
         // Play audio on load
-        let audio;
         window.onload = function() {
-            audio = new Audio('https://cdn.discordapp.com/attachments/1233589112897011764/1323934733511561256/Cancun_luxurious_remix__SEGA__unreleased__YouConvert.net_.mp3?ex=677651cd&is=6775004d&hm=ca368ec7170394b8f3488fedd50f61dc362ca2c83fa25b160206c55ffab571fc');
+            const audio = new Audio('https://github.com/NebulaServicesA/st4rwaresite/raw/refs/heads/main/Cancun_luxurious_remix__SEGA__unreleased_%5B_YouConvert.net_%5D.mp3');
             audio.loop = true; // Loop the audio
             audio.play().catch(error => {
                 console.log("Audio playback failed:", error);
